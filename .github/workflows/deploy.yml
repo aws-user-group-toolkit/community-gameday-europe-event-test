@@ -53,7 +53,13 @@ jobs:
           fi
 
       # 5. Install and build the web player with the correct GitHub Pages base path
-      - name: Install dependencies
+      #    The stream root must be installed first so @remotion/transitions and other
+      #    Remotion packages are available when the web-player resolves its composition imports.
+      - name: Install stream root dependencies
+        working-directory: stream
+        run: npm install
+
+      - name: Install web-player dependencies
         working-directory: stream/web-player
         run: npm install
 
