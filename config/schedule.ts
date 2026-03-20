@@ -31,3 +31,4 @@ export const COMPOSITIONS = {
   closing:   { fps: 30, width: 1280, height: 720, durationInFrames: 21000  }, // ~11.7 min
 } as const;
 
+
