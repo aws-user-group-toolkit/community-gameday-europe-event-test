@@ -16,6 +16,8 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    outputs:
+      pages-ready: ${{ steps.check-pages.outputs.ready }}
     steps:
       # 1. Check out this config repo
       - name: Checkout event config
@@ -23,17 +25,9 @@ jobs:
         with:
           path: countdown
 
-      # 2. Enable GitHub Pages with GitHub Actions as the deployment source.
-      #    enablement: true creates Pages on the repo if it doesn't exist yet.
-      #    Safe to run on every push — idempotent.
-      - name: Configure GitHub Pages
-        uses: actions/configure-pages@v4
-        with:
-          enablement: true
-
-      # 3. Check out the stream template repo (all web-player and composition code)
+      # 2. Check out the stream template repo (all web-player and composition code)
       #    By default uses the upstream template. To use your own fork:
-      #    → Settings → Variables → New variable
+      #    → Settings → Secrets and variables → Actions → Variables tab
       #    → Name: TEMPLATE_REPO  Value: your-org/your-template-repo-name
       - name: Checkout stream template
         uses: actions/checkout@v4
@@ -41,7 +35,7 @@ jobs:
           repository: ${{ vars.TEMPLATE_REPO || 'mzzavaa/community-gameday-europe-stream-templates' }}
           path: stream
 
-      # 4. Inject event config into the template
+      # 3. Inject event config into the template
       #    schedule.ts     → web-player (drives segment switching and countdown)
       #    participants.ts → stream config (organizers, UG data, logos — single source of truth)
       - name: Apply event config
@@ -49,7 +43,7 @@ jobs:
           cp countdown/config/schedule.ts    stream/web-player/src/schedule.ts
           cp countdown/config/participants.ts stream/config/participants.ts
 
-      # 5. Merge event-specific face photos (if present in this repo)
+      # 4. Merge event-specific face photos (if present in this repo)
       #    Add organizer face photos to public/faces/ in this repo.
       #    They will overwrite or supplement the template's default assets.
       - name: Merge face photos
@@ -61,7 +55,7 @@ jobs:
             echo "No face photos in countdown/public/faces/ — using template defaults"
           fi
 
-      # 6. Install and build the web player.
+      # 5. Install and build the web player.
       #    Base path is derived from the repository name so forks work automatically.
       #    GitHub Pages serves from: https://<owner>.github.io/<repo-name>/
       - name: Install stream root dependencies
@@ -83,8 +77,33 @@ jobs:
         with:
           path: stream/web-player/dist
 
+      # 6. Check whether GitHub Pages is configured for GitHub Actions deployments.
+      #    GitHub does not allow the GITHUB_TOKEN to enable Pages on forked repos in orgs.
+      #    If Pages is not yet set up, this step prints setup instructions and skips deploy.
+      #    Fix: Settings → Pages → Source → GitHub Actions, then push again.
+      - name: Check GitHub Pages configuration
+        id: check-pages
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          BUILD_TYPE=$(gh api repos/${{ github.repository }}/pages --jq '.build_type' 2>/dev/null || echo "none")
+          if [ "$BUILD_TYPE" = "workflow" ]; then
+            echo "ready=true" >> $GITHUB_OUTPUT
+            echo "✅ GitHub Pages is configured for GitHub Actions — deploying."
+          else
+            echo "ready=false" >> $GITHUB_OUTPUT
+            echo ""
+            echo "⚠️  GitHub Pages is not configured yet."
+            echo "    1. Go to: https://github.com/${{ github.repository }}/settings/pages"
+            echo "    2. Under Source, select: GitHub Actions"
+            echo "    3. Push any change to main to deploy."
+            echo ""
+            echo "    The build artifact has been uploaded. Only the deploy step is skipped."
+          fi
+
   deploy:
     needs: build
+    if: needs.build.outputs.pages-ready == 'true'
     runs-on: ubuntu-latest
     environment:
       name: github-pages

@@ -18,20 +18,28 @@ https://mzzavaa.github.io/community-gameday-europe-event/
 
 ## Setup
 
-Fork this repository, then do **one thing**:
+Fork this repository, then do these **two one-time steps**:
 
+**Step 1 — Enable workflows**
 1. Go to your fork's **Actions** tab
 2. Click **"I understand my workflows, go ahead and enable them"**
-3. Push any change to `main` (or re-run the workflow manually)
 
-That's it. GitHub disables workflows on all forks by default as a security measure — this one click is unavoidable, but it only happens once.
+GitHub disables workflows on all forks by default as a security measure. This click is unavoidable and only happens once.
 
-After that, every push to `main` builds and deploys automatically. The workflow:
-- Enables GitHub Pages automatically (no Settings step needed)
-- Derives the correct base path from your repository name
+**Step 2 — Enable GitHub Pages**
+1. Go to your fork's **Settings → Pages**
+2. Under **Source**, select **GitHub Actions**
+3. Save
 
-Your page will be live at:
+GitHub does not allow Actions workflows to enable Pages automatically on forked repositories. This one-time click is also unavoidable.
+
+**Step 3 — Deploy**
+
+Push any change to `main` (or re-run the workflow manually from the Actions tab). The page will be live at:
+
 `https://<your-org-or-username>.github.io/<your-repo-name>/`
+
+After that, every push to `main` builds and deploys automatically with no further manual steps.
 
 ---
 
@@ -43,7 +51,7 @@ On every push to `main`, GitHub Actions:
 2. Overwrites `stream/config/participants.ts` with `config/participants.ts` from this repo
 3. Overwrites `stream/web-player/src/schedule.ts` with `config/schedule.ts` from this repo
 4. Merges face photos from `public/faces/` into `stream/public/assets/faces/`
-5. Builds the web player with Vite (`--base=/community-gameday-europe-event/`)
+5. Builds the web player with Vite (base path derived from your repo name automatically)
 6. Deploys the built output to GitHub Pages
 
 No manual build step needed. Push → live in ~2 minutes.
