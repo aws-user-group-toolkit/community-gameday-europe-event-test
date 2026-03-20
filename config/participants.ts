@@ -205,3 +205,9 @@ export const AWS_SUPPORTERS: Organizer[] = [
   { name: "Uliana", jobTitle: "Community Manager, AWS",        flag: "🌍", face: "assets/faces/uliana.jpg",  type: "aws" },
   { name: "Natalia", jobTitle: "DevEx Community Manager, AWS", flag: "🌍", face: "assets/faces/natalia.jpg", type: "aws" },
 ];
+
+// ── Display Stats Config ────────────────────────────────────────────────────
+// Pick which 1–5 stats appear in the "By the Numbers" sections.
+// Options: "user-groups" | "countries" | "timezones" | "edition" | "gameplay-hours"
+export type StatType = "user-groups" | "countries" | "timezones" | "edition" | "gameplay-hours";
+export const DISPLAY_STATS: StatType[] = ["user-groups", "countries", "timezones", "edition"];
