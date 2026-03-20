@@ -66,6 +66,13 @@ jobs:
         working-directory: stream
         run: npm install
 
+      # 5b. Generate dynamic Europe map from UG city locations in participants.ts.
+      #     Downloads dark CartoDB tiles + geocodes cities via Nominatim (no API key needed).
+      #     Overwrites public/assets/europe-map.png with a map reflecting actual event UGs.
+      - name: Generate Europe map
+        working-directory: stream
+        run: npx tsx scripts/generate-map.ts
+
       - name: Install web-player dependencies
         working-directory: stream/web-player
         run: npm install
