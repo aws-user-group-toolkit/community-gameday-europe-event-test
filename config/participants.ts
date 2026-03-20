@@ -137,6 +137,8 @@ export const AWS_SUPPORTERS: Organizer[] = [
   { name: "Natalia", jobTitle: "DevEx Community Manager, AWS",  flag: "🌍", face: "assets/faces/natalia.jpg", type: "aws" },
 ];
 
+export const EVENT_REGION = "the Americas";
+
 // ── Display Stats Config ────────────────────────────────────────────────────
 export type StatType = "user-groups" | "countries" | "timezones" | "edition" | "gameplay-hours";
 export type StatConfig = StatType | { type: StatType; sub: string };
