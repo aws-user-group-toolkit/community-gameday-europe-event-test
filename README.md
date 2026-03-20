@@ -18,10 +18,17 @@ https://mzzavaa.github.io/community-gameday-europe-event/
 
 ## Setup
 
-Fork this repository and push to `main` — that's it. The workflow:
+Fork this repository, then do **one thing**:
 
-- Enables GitHub Pages automatically (no manual Settings step needed)
-- Derives the base path from the repository name automatically
+1. Go to your fork's **Actions** tab
+2. Click **"I understand my workflows, go ahead and enable them"**
+3. Push any change to `main` (or re-run the workflow manually)
+
+That's it. GitHub disables workflows on all forks by default as a security measure — this one click is unavoidable, but it only happens once.
+
+After that, every push to `main` builds and deploys automatically. The workflow:
+- Enables GitHub Pages automatically (no Settings step needed)
+- Derives the correct base path from your repository name
 
 Your page will be live at:
 `https://<your-org-or-username>.github.io/<your-repo-name>/`
