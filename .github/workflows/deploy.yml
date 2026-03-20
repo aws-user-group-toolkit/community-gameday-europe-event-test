@@ -38,10 +38,14 @@ jobs:
       # 3. Inject event config into the template
       #    schedule.ts     → web-player (drives segment switching and countdown)
       #    participants.ts → stream config (organizers, UG data, logos — single source of truth)
+      #    EVENT_DATE is also patched into event.ts so Remotion compositions use the correct date
       - name: Apply event config
         run: |
           cp countdown/config/schedule.ts    stream/web-player/src/schedule.ts
           cp countdown/config/participants.ts stream/config/participants.ts
+          EVENT_DATE=$(grep -oP 'EVENT_DATE\s*=\s*"\K[^"]+' countdown/config/schedule.ts)
+          sed -i "s|export const EVENT_DATE = \"[^\"]*\";|export const EVENT_DATE = \"$EVENT_DATE\";|" stream/config/event.ts
+          echo "Patched EVENT_DATE to: $EVENT_DATE"
 
       # 4. Merge event-specific face photos (if present in this repo)
       #    Add organizer face photos to public/faces/ in this repo.
