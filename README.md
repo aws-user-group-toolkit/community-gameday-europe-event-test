@@ -18,28 +18,29 @@ https://mzzavaa.github.io/community-gameday-europe-event/
 
 ## Setup
 
-Fork this repository, then do these **two one-time steps**:
+Three one-time steps after forking, then every push deploys automatically.
 
-**Step 1 — Enable workflows**
-1. Go to your fork's **Actions** tab
-2. Click **"I understand my workflows, go ahead and enable them"**
+**1. Enable workflows**
 
-GitHub disables workflows on all forks by default as a security measure. This click is unavoidable and only happens once.
+Go to the **Actions** tab of your fork and click:
+> "I understand my workflows, go ahead and enable them"
 
-**Step 2 — Enable GitHub Pages**
-1. Go to your fork's **Settings → Pages**
-2. Under **Source**, select **GitHub Actions**
-3. Save
+GitHub disables workflows on all forks by default. This click is unavoidable.
 
-GitHub does not allow Actions workflows to enable Pages automatically on forked repositories. This one-time click is also unavoidable.
+**2. Enable GitHub Pages**
 
-**Step 3 — Deploy**
+Go to **Settings → Pages** and change the Source dropdown:
 
-Push any change to `main` (or re-run the workflow manually from the Actions tab). The page will be live at:
+> Source: ~~Deploy from a branch~~ → **GitHub Actions** → Save
 
+GitHub does not allow workflows to enable Pages automatically on forked repos. This click is also unavoidable.
+
+**3. Trigger a deploy**
+
+Push any change to `main`, or go to **Actions → Deploy to GitHub Pages → Re-run jobs**.
+
+Your page will be live at:
 `https://<your-org-or-username>.github.io/<your-repo-name>/`
-
-After that, every push to `main` builds and deploys automatically with no further manual steps.
 
 ---
 
