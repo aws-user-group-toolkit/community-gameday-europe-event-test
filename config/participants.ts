@@ -1,5 +1,5 @@
 /**
- * Participants Configuration  -  AWS Community GameDay Europe 2026
+ * Participants Configuration  -  AWS Community GameDay Europe
  *
  * Contains all organizers, AWS supporters, and participating user groups.
  * Update face image paths if you move the assets folder.
@@ -9,133 +9,199 @@
  * Note: asset paths here are relative to public/, so use "assets/faces/..."
  */
 
-// ── Organizer Interface ──
-export interface Organizer {
-  name: string;          // Display name shown on screen and used for lookups
-  fullName?: string;     // Optional longer name — only needed if the display name differs (e.g., host intro card)
-  streamRole?: "host" | "co-organizer" | "support-presenter" | "gamemaster"; // Marks who does what on stream — set this instead of editing the template
-  role: string;          // User group name or job title
-  country: string;       // Country name or region
-  city?: string;         // City shown on cards (e.g., "Vienna, Austria")
-  flag: string;
-  face: string;
-  type: "community" | "aws";
-  title?: string;        // Professional title shown on intro cards (e.g., "AWS Community Hero")
-  subtitle?: string;     // Secondary line on intro card
-  bio?: string[];        // Bullet points for the preshow bio slide
-}
-
-// ── Community Organizers ──
-export const ORGANIZERS: Organizer[] = [
-  {
-    name: "Marcel", streamRole: "co-organizer", role: "AWS User Group Münsterland", country: "Germany", city: "Münster, Germany", flag: "🇩🇪", face: "assets/faces/marcel.jpg", type: "community",
-  },
-  {
-    name: "Manuel", streamRole: "co-organizer", role: "AWS User Group Frankfurt", country: "Germany", city: "Frankfurt, Germany", flag: "🇩🇪", face: "assets/faces/manuel.jpg", type: "community",
-  },
-  {
-    name: "Anda", streamRole: "co-organizer", role: "AWS User Group Geneva", country: "Switzerland", city: "Geneva, Switzerland", flag: "🇨🇭", face: "assets/faces/anda.jpg", type: "community",
-  },
-  {
-    name: "Jerome", streamRole: "host", role: "AWS User Group Belgium", country: "Belgium", city: "Brussels, Belgium", flag: "🇧🇪", face: "assets/faces/jerome.jpg", type: "community",
-    title: "AWS Community Builder",
-    subtitle: "AWS User Group Belgium",
-    bio: [
-      "Your host for today's GameDay Europe stream",
-      "Leader of AWS User Group Belgium",
-    ],
-  },
-  {
-    name: "Andreas", role: "AWS User Group Bonn", country: "Germany", city: "Bonn, Germany", flag: "🇩🇪", face: "assets/faces/andreas.jpg", type: "community",
-  },
-  {
-    name: "Lucian", role: "AWS User Group Timisoara", country: "Romania", city: "Timisoara, Romania", flag: "🇷🇴", face: "assets/faces/lucian.jpg", type: "community",
-  },
-  {
-    name: "Linda", role: "AWS User Group Vienna", country: "Austria", city: "Vienna, Austria", flag: "🇦🇹", face: "assets/faces/linda.jpg", type: "community",
-  },
-  {
-    name: "Mihaly", role: "AWS User Group Budapest", country: "Hungary", city: "Budapest, Hungary", flag: "🇭🇺", face: "assets/faces/mihaly.jpg", type: "community",
-  },
-];
-
-// ── AWS Supporters (Gamemasters & Community Team) ──
-export const AWS_SUPPORTERS: Organizer[] = [
-  { name: "Arnaud", streamRole: "gamemaster", role: "Sr. Developer Advocate, AWS", country: "France", flag: "🇫🇷", face: "assets/faces/arnaud.jpg", type: "aws" },
-  { name: "Loïc",   role: "Sr. Technical Account Manager, AWS",                     country: "France", flag: "🇫🇷", face: "assets/faces/loic.jpg",   type: "aws" },
-  { name: "Uliana", role: "Community Manager, AWS",             country: "DACH, CEE, CEAR & MENAT", flag: "🌍", face: "assets/faces/uliana.jpg", type: "aws" },
-  { name: "Natalia", role: "DevEx Community Manager, AWS",      country: "EMEA / Europe South",     flag: "🌍", face: "assets/faces/natalia.jpg", type: "aws" },
-];
-
-
 // ── User Group Interface ──
 export interface UserGroup {
   flag: string;
   name: string;
-  city: string;
+  location: string; // "City, Country"
   logo?: string; // Logo URL — add directly here, no need for a separate logos.ts
 }
 
 // ── All 57 Participating User Groups ──
 // AWS Community GameDay Europe 2026
-export const USER_GROUPS: UserGroup[] = [
-  { flag: "🇪🇸", name: "AWS Barcelona User Group",         city: "Barcelona, Spain" },
-  { flag: "🇬🇧", name: "AWS Leeds User Group",             city: "Leeds, United Kingdom" },
-  { flag: "🇫🇮", name: "AWS Meetup JKL",                  city: "Jyväskylä, Finland" },
-  { flag: "🇨🇭", name: "AWS Swiss UG  -  Lausanne",          city: "Lausanne, Switzerland" },
-  { flag: "🇨🇭", name: "AWS Swiss UG  -  Zürich",            city: "Zürich, Switzerland" },
-  { flag: "🇨🇭", name: "AWS Swiss UG  -  Geneva",            city: "Geneva, Switzerland" },
-  { flag: "🇷🇴", name: "AWS Transylvania Cloud",           city: "Cluj-Napoca, Romania" },
-  { flag: "🇵🇱", name: "AWS User Group 3City",             city: "Gdansk, Poland" },
-  { flag: "🇪🇸", name: "AWS UG Asturias",                  city: "Oviedo, Spain" },
-  { flag: "🇬🇷", name: "AWS User Group Athens",            city: "Athens, Greece" },
-  { flag: "🇧🇪", name: "AWS User Group Belgium",           city: "Brussels, Belgium" },
-  { flag: "🇩🇪", name: "AWS User Group Bonn",              city: "Bonn, Germany" },
-  { flag: "🇭🇺", name: "AWS User Group Budapest",          city: "Budapest, Hungary" },
-  { flag: "🇩🇪", name: "AWS User Group Cologne",           city: "Köln, Germany" },
-  { flag: "🇮🇹", name: "AWS User Group Cuneo",             city: "Cuneo, Italy" },
-  { flag: "🇩🇪", name: "AWS User Group Dortmund",          city: "Dortmund, Germany" },
-  { flag: "🇫🇮", name: "AWS User Group Finland",           city: "Helsinki, Finland" },
-  { flag: "🇫🇷", name: "AWS UG France  -  Paris",            city: "Paris, France" },
-  { flag: "🇪🇸", name: "AWS UG Galicia",                   city: "Santiago de Compostela, Spain" },
-  { flag: "🇮🇹", name: "AWS User Group Genova",            city: "Genova, Italy" },
-  { flag: "🇩🇪", name: "AWS User Group Hannover",          city: "Hannover, Germany" },
-  { flag: "🇳🇴", name: "AWS UG Innlandet",                 city: "Hamar, Norway" },
-  { flag: "🇹🇷", name: "AWS User Group Istanbul",          city: "Istanbul, Turkey" },
-  { flag: "🇺🇦", name: "AWS UG Ivano-Frankivsk",           city: "Ivano-Frankivsk, Ukraine" },
-  { flag: "🇫🇮", name: "AWS User Group Kuopio",            city: "Kuopio, Finland" },
-  { flag: "🇸🇮", name: "AWS UG Ljubljana",                 city: "Ljubljana, Slovenia" },
-  { flag: "🇲🇰", name: "AWS UG Macedonia",                 city: "Skopje, Macedonia" },
-  { flag: "🇪🇸", name: "AWS User Group Malaga",            city: "Malaga, Spain" },
-  { flag: "🇲🇩", name: "AWS UG Moldova",                   city: "Chisinau, Moldova" },
-  { flag: "🇲🇪", name: "AWS UG Montenegro",                city: "Podgorica, Montenegro" },
-  { flag: "🇩🇪", name: "AWS User Group Munich",            city: "München, Germany" },
-  { flag: "🇩🇪", name: "AWS UG Münsterland",               city: "Münster, Germany" },
-  { flag: "🇮🇹", name: "AWS User Group Napoli",            city: "Naples, Italy" },
-  { flag: "🇩🇪", name: "AWS UG Nürnberg",                  city: "Nürnberg, Germany" },
-  { flag: "🇳🇴", name: "AWS UG Oslo",                      city: "Oslo, Norway" },
-  { flag: "🇮🇹", name: "AWS User Group Pavia",             city: "Pavia, Italy" },
-  { flag: "🇮🇹", name: "AWS User Group Roma",              city: "Roma, Italy" },
-  { flag: "🇮🇹", name: "AWS User Group Salerno",           city: "Salerno, Italy" },
-  { flag: "🇧🇦", name: "AWS UG Sarajevo",                  city: "Sarajevo, Bosnia & Herzegovina" },
-  { flag: "🇸🇪", name: "AWS UG Skåne",                     city: "Malmö, Sweden" },
-  { flag: "🇫🇮", name: "AWS UG Tampere",                   city: "Tampere, Finland" },
-  { flag: "🇨🇭", name: "AWS UG Ticino",                    city: "Lugano, Switzerland" },
-  { flag: "🇷🇴", name: "AWS UG Timisoara",                 city: "Timisoara, Romania" },
-  { flag: "🇮🇹", name: "AWS UG Venezia",                   city: "Venice, Italy" },
-  { flag: "🇦🇹", name: "AWS User Group Vienna",            city: "Vienna, Austria" },
-  { flag: "🇵🇱", name: "AWS UG Warsaw",                    city: "Warsaw, Poland" },
-  { flag: "🇬🇧", name: "AWS UG West Midlands",             city: "Birmingham, United Kingdom" },
-  { flag: "🇮🇹", name: "AWS Well-Architected UG Italy",    city: "Milano, Italy" },
-  { flag: "🇩🇪", name: "AWS Women's UG Munich",            city: "Munich, Germany" },
-  { flag: "🇩🇪", name: "Berlin AWS User Group",            city: "Berlin, Germany" },
-  { flag: "🇷🇴", name: "Bucharest AWS User Group",         city: "Bucharest, Romania" },
-  { flag: "🇩🇪", name: "Dresden AWS User Group",           city: "Dresden, Germany" },
-  { flag: "🇩🇪", name: "Frankfurt AWS User Group",         city: "Frankfurt, Germany" },
-  { flag: "🇫🇷", name: "Grenoble AWS User Group",          city: "Grenoble, France" },
-  { flag: "🇩🇪", name: "Leipzig AWS User Group",           city: "Leipzig, Germany" },
-  { flag: "🇫🇷", name: "Lille AWS User Group",             city: "Lille, France" },
-  { flag: "🇫🇷", name: "Poitiers AWS User Group",          city: "Poitiers, France" },
-];
+//
+// `as const satisfies UserGroup[]` preserves the literal string types of every
+// `name` field so that TypeScript can derive the UserGroupName union below.
+export const USER_GROUPS = [
+  { flag: "🇪🇸", name: "AWS Barcelona User Group",         location: "Barcelona, Spain",                    logo: "https://secure.meetupstatic.com/photos/event/a/6/c/e/clean_524682702.webp" },
+  { flag: "🇬🇧", name: "AWS Leeds User Group",             location: "Leeds, United Kingdom",               logo: "https://secure.meetupstatic.com/photos/event/a/8/f/c/600_478303260.webp" },
+  { flag: "🇫🇮", name: "AWS Meetup JKL",                   location: "Jyväskylä, Finland",                  logo: "https://secure.meetupstatic.com/photos/event/4/d/f/7/clean_502519959.webp" },
+  { flag: "🇨🇭", name: "AWS Swiss UG - Lausanne",          location: "Lausanne, Switzerland",               logo: "https://secure.meetupstatic.com/photos/event/3/b/1/8/clean_507495128.webp" },
+  { flag: "🇨🇭", name: "AWS Swiss UG - Zürich",            location: "Zürich, Switzerland",                 logo: "https://secure.meetupstatic.com/photos/event/d/5/4/7/clean_481554599.webp" },
+  { flag: "🇨🇭", name: "AWS Swiss UG - Geneva",            location: "Geneva, Switzerland",                 logo: "https://secure.meetupstatic.com/photos/event/6/f/2/1/clean_512908449.webp" },
+  { flag: "🇷🇴", name: "AWS Transylvania Cloud",           location: "Cluj-Napoca, Romania",                logo: "https://secure.meetupstatic.com/photos/event/5/1/f/600_528241311.webp" },
+  { flag: "🇵🇱", name: "AWS User Group 3City",             location: "Gdansk, Poland",                      logo: "https://secure.meetupstatic.com/photos/event/9/d/3/e/clean_519460254.webp" },
+  { flag: "🇪🇸", name: "AWS UG Asturias",                  location: "Oviedo, Spain",                       logo: "https://secure.meetupstatic.com/photos/event/2/8/0/6/clean_513130246.webp" },
+  { flag: "🇬🇷", name: "AWS User Group Athens",            location: "Athens, Greece",                      logo: "https://secure.meetupstatic.com/photos/event/a/1/8/b/clean_520181355.webp" },
+  { flag: "🇧🇪", name: "AWS User Group Belgium",           location: "Brussels, Belgium",                   logo: "https://secure.meetupstatic.com/photos/event/7/d/7/b/clean_523472123.webp" },
+  { flag: "🇩🇪", name: "AWS User Group Bonn",              location: "Bonn, Germany",                       logo: "https://secure.meetupstatic.com/photos/event/3/f/5/2/clean_513136210.webp" },
+  { flag: "🇭🇺", name: "AWS User Group Budapest",          location: "Budapest, Hungary",                   logo: "https://secure.meetupstatic.com/photos/event/7/3/e/5/clean_524189669.webp" },
+  { flag: "🇩🇪", name: "AWS User Group Cologne",           location: "Köln, Germany",                       logo: "https://secure.meetupstatic.com/photos/event/e/4/3/8/clean_518038424.webp" },
+  { flag: "🇮🇹", name: "AWS User Group Cuneo",             location: "Cuneo, Italy",                        logo: "https://secure.meetupstatic.com/photos/event/c/e/d/5/clean_527092949.webp" },
+  { flag: "🇩🇪", name: "AWS User Group Dortmund",          location: "Dortmund, Germany",                   logo: "https://secure.meetupstatic.com/photos/event/4/9/3/e/clean_531138750.webp" },
+  { flag: "🇫🇮", name: "AWS User Group Finland",           location: "Helsinki, Finland",                   logo: "https://secure.meetupstatic.com/photos/event/5/9/8/a/clean_484822922.webp" },
+  { flag: "🇫🇷", name: "AWS UG France - Paris",            location: "Paris, France",                       logo: "https://secure.meetupstatic.com/photos/event/c/5/1/5/clean_497630453.webp" },
+  { flag: "🇪🇸", name: "AWS UG Galicia",                   location: "Santiago de Compostela, Spain",       logo: "https://secure.meetupstatic.com/photos/event/3/3/1/c/600_531253084.webp" },
+  { flag: "🇮🇹", name: "AWS User Group Genova",            location: "Genova, Italy",                       logo: "https://secure.meetupstatic.com/photos/event/c/d/8/2/clean_530272610.webp" },
+  { flag: "🇩🇪", name: "AWS User Group Hannover",          location: "Hannover, Germany",                   logo: "https://secure.meetupstatic.com/photos/event/5/d/e/d/highres_457224045.jpeg" },
+  { flag: "🇳🇴", name: "AWS UG Innlandet",                 location: "Hamar, Norway",                       logo: "https://secure.meetupstatic.com/photos/event/4/4/a/5/clean_529097573.webp" },
+  { flag: "🇹🇷", name: "AWS User Group Istanbul",          location: "Istanbul, Turkey" },
+  { flag: "🇺🇦", name: "AWS UG Ivano-Frankivsk",           location: "Ivano-Frankivsk, Ukraine",            logo: "https://secure.meetupstatic.com/photos/event/7/7/3/b/clean_487470523.webp" },
+  { flag: "🇫🇮", name: "AWS User Group Kuopio",            location: "Kuopio, Finland",                     logo: "https://secure.meetupstatic.com/photos/event/6/c/5/c/clean_516627740.webp" },
+  { flag: "🇸🇮", name: "AWS UG Ljubljana",                 location: "Ljubljana, Slovenia",                 logo: "https://secure.meetupstatic.com/photos/event/7/6/5/0/clean_488190288.webp" },
+  { flag: "🇲🇰", name: "AWS UG Macedonia",                 location: "Skopje, Macedonia",                   logo: "https://secure.meetupstatic.com/photos/event/3/3/2/8/clean_502273096.webp" },
+  { flag: "🇪🇸", name: "AWS User Group Malaga",            location: "Malaga, Spain",                       logo: "https://secure.meetupstatic.com/photos/event/6/c/6/clean_531001734.webp" },
+  { flag: "🇲🇩", name: "AWS UG Moldova",                   location: "Chisinau, Moldova",                   logo: "https://secure.meetupstatic.com/photos/event/9/e/b/5/clean_509920629.webp" },
+  { flag: "🇲🇪", name: "AWS UG Montenegro",                location: "Podgorica, Montenegro",               logo: "https://secure.meetupstatic.com/photos/event/3/9/3/e/clean_520514654.webp" },
+  { flag: "🇩🇪", name: "AWS User Group Munich",            location: "München, Germany",                    logo: "https://secure.meetupstatic.com/photos/event/c/0/3/4/clean_504529204.webp" },
+  { flag: "🇩🇪", name: "AWS UG Münsterland",               location: "Münster, Germany",                    logo: "https://secure.meetupstatic.com/photos/event/3/b/c/2/clean_530115298.webp" },
+  { flag: "🇮🇹", name: "AWS User Group Napoli",            location: "Naples, Italy",                       logo: "https://secure.meetupstatic.com/photos/event/1/c/7/7/clean_520447287.webp" },
+  { flag: "🇩🇪", name: "AWS UG Nürnberg",                  location: "Nürnberg, Germany",                   logo: "https://secure.meetupstatic.com/photos/event/d/0/9/b/clean_466973403.webp" },
+  { flag: "🇳🇴", name: "AWS UG Oslo",                      location: "Oslo, Norway",                        logo: "https://secure.meetupstatic.com/photos/event/3/c/d/c/clean_531375580.webp" },
+  { flag: "🇮🇹", name: "AWS User Group Pavia",             location: "Pavia, Italy",                        logo: "https://secure.meetupstatic.com/photos/event/b/b/b/e/clean_519588062.webp" },
+  { flag: "🇮🇹", name: "AWS User Group Roma",              location: "Roma, Italy",                         logo: "https://secure.meetupstatic.com/photos/event/9/4/d/2/clean_526178098.webp" },
+  { flag: "🇮🇹", name: "AWS User Group Salerno",           location: "Salerno, Italy",                      logo: "https://secure.meetupstatic.com/photos/event/9/9/2/5/clean_531519205.webp" },
+  { flag: "🇧🇦", name: "AWS UG Sarajevo",                  location: "Sarajevo, Bosnia & Herzegovina",      logo: "https://secure.meetupstatic.com/photos/event/9/9/8/6/clean_503679302.webp" },
+  { flag: "🇸🇪", name: "AWS UG Skåne",                     location: "Malmö, Sweden",                       logo: "https://secure.meetupstatic.com/photos/event/6/9/5/d/clean_526586973.webp" },
+  { flag: "🇫🇮", name: "AWS UG Tampere",                   location: "Tampere, Finland",                    logo: "https://secure.meetupstatic.com/photos/event/7/d/6/e/clean_485432110.webp" },
+  { flag: "🇨🇭", name: "AWS UG Ticino",                    location: "Lugano, Switzerland",                 logo: "https://secure.meetupstatic.com/photos/event/2/9/4/d/clean_531490573.webp" },
+  { flag: "🇷🇴", name: "AWS UG Timisoara",                 location: "Timisoara, Romania",                  logo: "https://secure.meetupstatic.com/photos/event/8/9/a/8/clean_513815240.webp" },
+  { flag: "🇮🇹", name: "AWS UG Venezia",                   location: "Venice, Italy",                       logo: "https://secure.meetupstatic.com/photos/event/8/8/7/7/clean_523654935.webp" },
+  { flag: "🇦🇹", name: "AWS User Group Vienna",            location: "Vienna, Austria",                     logo: "https://secure.meetupstatic.com/photos/event/9/8/d/5/highres_523779125.jpeg" },
+  { flag: "🇵🇱", name: "AWS UG Warsaw",                    location: "Warsaw, Poland",                      logo: "https://secure.meetupstatic.com/photos/event/6/1/e/5/clean_516145061.webp" },
+  { flag: "🇬🇧", name: "AWS UG West Midlands",             location: "Birmingham, United Kingdom",          logo: "https://secure.meetupstatic.com/photos/event/6/8/3/a/clean_526886682.webp" },
+  { flag: "🇮🇹", name: "AWS Well-Architected UG Italy",    location: "Milano, Italy",                       logo: "https://secure.meetupstatic.com/photos/event/b/a/9/8/clean_528767768.webp" },
+  { flag: "🇩🇪", name: "AWS Women's UG Munich",            location: "Munich, Germany",                     logo: "https://secure.meetupstatic.com/photos/event/2/e/5/b/clean_523991867.webp" },
+  { flag: "🇩🇪", name: "Berlin AWS User Group",            location: "Berlin, Germany",                     logo: "https://secure.meetupstatic.com/photos/event/1/4/c/2/clean_495125314.webp" },
+  { flag: "🇷🇴", name: "Bucharest AWS User Group",         location: "Bucharest, Romania",                  logo: "https://secure.meetupstatic.com/photos/event/9/6/0/1/clean_515798401.webp" },
+  { flag: "🇩🇪", name: "Dresden AWS User Group",           location: "Dresden, Germany",                    logo: "https://secure.meetupstatic.com/photos/event/7/f/4/4/clean_469592580.webp" },
+  { flag: "🇩🇪", name: "Frankfurt AWS User Group",         location: "Frankfurt, Germany",                  logo: "https://secure.meetupstatic.com/photos/event/b/4/5/f/clean_495406175.webp" },
+  { flag: "🇫🇷", name: "Grenoble AWS User Group",          location: "Grenoble, France",                    logo: "https://secure.meetupstatic.com/photos/event/c/d/1/c/clean_497632508.webp" },
+  { flag: "🇩🇪", name: "Leipzig AWS User Group",           location: "Leipzig, Germany",                    logo: "https://secure.meetupstatic.com/photos/event/8/1/3/7/clean_495873079.webp" },
+  { flag: "🇫🇷", name: "Lille AWS User Group",             location: "Lille, France",                       logo: "https://secure.meetupstatic.com/photos/event/c/6/2/1/clean_479690721.webp" },
+  { flag: "🇫🇷", name: "Poitiers AWS User Group",          location: "Poitiers, France",                    logo: "https://secure.meetupstatic.com/photos/event/c/d/3/1/clean_497632529.webp" },
+] as const satisfies UserGroup[];
+
+// Derived from USER_GROUPS — every valid user group name as a TypeScript union.
+export type UserGroupName = typeof USER_GROUPS[number]["name"];
 
 export const COUNTRIES = Array.from(new Set(USER_GROUPS.map((g) => g.flag)));
+
+// ── Community Program Types ──
+export type CommunityProgram =
+  | "ug-leader"
+  | "aws-hero"
+  | "aws-community-builder"
+  | "cloud-club-captain"
+  | "aws-ambassador";
+
+export const COMMUNITY_PROGRAM_LABELS: Record<CommunityProgram, string> = {
+  "ug-leader":              "AWS User Group Leader",
+  "aws-hero":               "AWS Hero",
+  "aws-community-builder":  "AWS Community Builder",
+  "cloud-club-captain":     "Cloud Club Captain",
+  "aws-ambassador":         "AWS Ambassador",
+};
+
+export interface CommunityMembership {
+  program: CommunityProgram;
+  userGroup?: UserGroupName;
+}
+
+// ── Organizer Interface ──
+export interface Organizer {
+  name: string;
+  fullName?: string;
+  streamRole?: "host" | "co-organizer" | "support-presenter" | "gamemaster";
+  programs?: CommunityMembership[];
+  jobTitle?: string;
+  location?: string;
+  flag: string;
+  face: string;
+  type: "community" | "aws";
+  title?: string;
+  subtitle?: string;
+  bio?: string[];
+}
+
+export function getOrganizerRole(p: Organizer): string {
+  if (p.jobTitle) return p.jobTitle;
+  if (p.programs?.length) {
+    return p.programs.map((m) => COMMUNITY_PROGRAM_LABELS[m.program]).join(" & ");
+  }
+  return "";
+}
+
+export function getOrganizerUserGroup(p: Organizer): UserGroupName | undefined {
+  return p.programs?.find((m) => m.program === "ug-leader")?.userGroup;
+}
+
+// ── Community Organizers ──
+// Iteration 1 — Scenario A: Linda as host, full organizer lineup, 57 UGs
+export const ORGANIZERS: Organizer[] = [
+  {
+    name: "Jerome", streamRole: "co-organizer",
+    programs: [{ program: "ug-leader", userGroup: "AWS User Group Belgium" }],
+    location: "Brussels, Belgium", flag: "🇧🇪", face: "assets/faces/jerome.jpg", type: "community",
+    bio: ["AWS User Group Leader and co-founder of this initiative."],
+  },
+  {
+    name: "Anda", streamRole: "co-organizer",
+    programs: [
+      { program: "ug-leader", userGroup: "AWS Swiss UG - Geneva" },
+      { program: "aws-community-builder" },
+    ],
+    location: "Geneva, Switzerland", flag: "🇨🇭", face: "assets/faces/anda.jpg", type: "community",
+    bio: ["AWS User Group Leader and initiator of this GameDay."],
+  },
+  {
+    name: "Marcel", streamRole: undefined,
+    programs: [{ program: "ug-leader", userGroup: "AWS UG Münsterland" }],
+    location: "Münster, Germany", flag: "🇩🇪", face: "assets/faces/marcel.jpg", type: "community",
+  },
+  {
+    name: "Linda", fullName: "Linda Mohamed", streamRole: "host",
+    programs: [
+      { program: "ug-leader", userGroup: "AWS User Group Vienna" },
+      { program: "aws-hero" },
+    ],
+    location: "Vienna, Austria", flag: "🇦🇹", face: "assets/faces/linda.jpg", type: "community",
+    title: "AWS Community Hero",
+    subtitle: "AWS User Group Vienna · Förderverein AWS Community DACH",
+    bio: [
+      "Your host for today's GameDay Europe stream - broadcasting live across 57 cities",
+      "Leader of AWS User Group Vienna & AWS Women's User Group Vienna",
+      "Chairwoman of Förderverein AWS Community DACH e.V.",
+    ],
+  },
+  {
+    name: "Manuel", streamRole: undefined,
+    programs: [{ program: "ug-leader", userGroup: "Frankfurt AWS User Group" }],
+    location: "Frankfurt, Germany", flag: "🇩🇪", face: "assets/faces/manuel.jpg", type: "community",
+  },
+  {
+    name: "Andreas", streamRole: undefined,
+    programs: [{ program: "ug-leader", userGroup: "AWS User Group Bonn" }],
+    location: "Bonn, Germany", flag: "🇩🇪", face: "assets/faces/andreas.jpg", type: "community",
+  },
+  {
+    name: "Lucian", streamRole: undefined,
+    programs: [{ program: "ug-leader", userGroup: "AWS UG Timisoara" }],
+    location: "Timisoara, Romania", flag: "🇷🇴", face: "assets/faces/lucian.jpg", type: "community",
+  },
+  {
+    name: "Mihaly", streamRole: "support-presenter",
+    programs: [{ program: "ug-leader", userGroup: "AWS User Group Budapest" }],
+    location: "Budapest, Hungary", flag: "🇭🇺", face: "assets/faces/mihaly.jpg", type: "community",
+  },
+];
+
+// ── AWS Supporters (Gamemasters & Community Team) ──
+export const AWS_SUPPORTERS: Organizer[] = [
+  { name: "Arnaud", streamRole: "gamemaster", jobTitle: "Sr. Developer Advocate, AWS",        flag: "🇫🇷", face: "assets/faces/arnaud.jpg", type: "aws",
+    bio: ["Sr. Developer Advocate at AWS. Delivers the official GameDay instructions."] },
+  { name: "Loïc",   streamRole: "gamemaster", jobTitle: "Sr. Technical Account Manager, AWS", flag: "🇫🇷", face: "assets/faces/loic.jpg",   type: "aws",
+    bio: ["Sr. Technical Account Manager at AWS. Co-delivers GameDay instructions."] },
+  { name: "Uliana", jobTitle: "Community Manager, AWS",        flag: "🌍", face: "assets/faces/uliana.jpg",  type: "aws" },
+  { name: "Natalia", jobTitle: "DevEx Community Manager, AWS", flag: "🌍", face: "assets/faces/natalia.jpg", type: "aws" },
+];
